@@ -97,17 +97,19 @@ public class ManagerSmartPhone {
         ArrayList<Smartphone> list = new ArrayList<>();
         File file = new File(fileSmartPhone);
         try {
-            file.createNewFile();
-            Scanner scan = new Scanner(file);
-            while (scan.hasNextLine()) {
-                String id = scan.nextLine();
-                String brand = scan.nextLine();
-                String name = scan.nextLine();
-                float price = Float.parseFloat(scan.nextLine());
-                int year = Integer.parseInt(scan.nextLine());
-                String screenSize = scan.nextLine();
-                Smartphone smartphone = new Smartphone(id, brand, name, price, year, screenSize);
-                list.add(smartphone);
+            if (!file.exists()) {
+                file.createNewFile();
+                Scanner scan = new Scanner(file);
+                while (scan.hasNextLine()) {
+                    String id = scan.nextLine();
+                    String brand = scan.nextLine();
+                    String name = scan.nextLine();
+                    float price = Float.parseFloat(scan.nextLine());
+                    int year = Integer.parseInt(scan.nextLine());
+                    String screenSize = scan.nextLine();
+                    Smartphone smartphone = new Smartphone(id, brand, name, price, year, screenSize);
+                    list.add(smartphone);
+                }
             }
         } catch (IOException | InvalidBrandNameException e) {
             e.printStackTrace();
